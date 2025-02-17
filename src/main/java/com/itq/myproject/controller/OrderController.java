@@ -39,7 +39,7 @@ public class OrderController {
 
     @GetMapping("/orders/{id}")
     public String getOrderById(@PathVariable Long id, Model model) {
-        model.addAttribute("order", orderService.getOrderById(id));
+        model.addAttribute("orderDto", orderService.getOrderById(id));
         return "order";
     }
 
