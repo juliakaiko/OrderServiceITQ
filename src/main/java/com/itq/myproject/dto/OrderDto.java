@@ -18,7 +18,7 @@ public class OrderDto {
     private Long totalSum;
 
     @NotNull(message = "Date may not be empty")
-    @Past(message = "Date cannot be in the future")
+    @PastOrPresent(message = "Date cannot be in the future")
     private LocalDate orderDate;
 
     @NotBlank(message = "The recipient may not be anonymous")
