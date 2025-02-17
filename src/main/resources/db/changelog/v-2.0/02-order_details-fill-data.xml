@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+      http://www.liquibase.org/xml/ns/pro
+      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+
+    <changeSet id="order_details_fill_data_1" author="julia_kaiko">
+        <preConditions>
+            <tableExists tableName="order_details"/>
+        </preConditions>
+        <sql>
+            INSERT INTO order_details (article, name, quantity, unit_price)
+            VALUES ('111111', 'Shampoo','2', '25');
+            INSERT INTO order_details (article, name, quantity, unit_price)
+            VALUES ('111112', 'Shaving Gel','2', '50');
+            INSERT INTO order_details (article, name, quantity, unit_price)
+            VALUES ('111113', 'Hairbrush','16', '10');
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

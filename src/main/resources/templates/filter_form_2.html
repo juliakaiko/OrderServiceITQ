@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order creation</title>
+    <link rel="stylesheet" href="/css/my_style.css">
+</head>
+<body>
+<div class="order-form">
+    <div class="container mt-5">
+        <h2>Find Order Between StartDate And EndDate AND Excluding the Product</h2>
+        <!-- Форма с использованием th:object и th:field -->
+        <form action="/orders/filter_between_dates_and_excluding_product" th:object="${orderDto}" method="post">
+
+            <!-- Поле Start Date -->
+            <div class="row justify-content-center">
+                <div class="form-group col-md-12">
+                    <div class="col-md-7">
+                        <label for="startDate">Start Date:</label>
+                        <input type="date" id="startDate" th:field="*{startDate}" required>
+                        <span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Поле End Date -->
+            <div class="row justify-content-center">
+                <div class="form-group col-md-12">
+                    <div class="col-md-7">
+                        <label for="endDate">End Date:</label>
+                        <input type="date" id="endDate" th:field="*{endDate}" required>
+                        <span th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Поле Product Article -->
+            <div class="row justify-content-center">
+                <div class="form-group col-md-12">
+                    <div class="col-md-7">
+                        <label for="productArticle">Product Article:</label>
+                        <input type="text" id="productArticle" th:field="*{productArticle}" required>
+                        <span th:if="${#fields.hasErrors('productArticle')}" th:errors="*{productArticle}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кнопка Submit -->
+            <div class="button-container">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

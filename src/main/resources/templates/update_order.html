@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order creation</title>
+    <link rel="stylesheet" href="/css/my_style.css">
+</head>
+<body>
+<div class="order-form">
+    <div class="container mt-5">
+        <h2>Update Order</h2>
+        <!-- Форма с использованием th:object и th:field -->
+        <form th:action="@{/orders/update/{id}(id=${orderDto.id})}" th:object="${orderDto}" method="post">
+            <!-- Скрытое поле для преобразования POST в PUT -->
+            <input type="hidden" name="_method" value="put" />
+
+            <!-- Поле Product Article -->
+            <div class="row justify-content-center">
+                <div class="form-group col-md-12">
+                    <div class="col-md-7">
+                        <label for="productArticle">Product Article:</label>
+                        <input type="text" id="productArticle" th:field="*{productArticle}" required>
+                        <span th:if="${#fields.hasErrors('productArticle')}" th:errors="*{productArticle}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Поле Product Name -->
+            <div class="row justify-content-center">
+                <div class="form-group col-md-12">
+                    <div class="col-md-7">
+                        <label for="productName">Product Name:</label>
+                        <input type="text" id="productName" th:field="*{productName}" required>
+                        <span th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Поле Quantity -->
+            <div class="row justify-content-center">
+                <div class="form-group col-md-12">
+                    <div class="col-md-7">
+                        <label for="quantity">Quantity:</label>
+                        <input type="text" id="quantity" th:field="*{quantity}" required>
+                        <span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Поле Unit Price -->
+            <div class="row justify-content-center">
+                <div class="form-group col-md-12">
+                    <div class="col-md-7">
+                        <label for="unitPrice">Unit Price:</label>
+                        <input type="text" id="unitPrice" th:field="*{unitPrice}" required>
+                        <span th:if="${#fields.hasErrors('unitPrice')}" th:errors="*{unitPrice}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Поле Date -->
+            <div class="row justify-content-center">
+                <div class="form-group col-md-12">
+                    <div class="col-md-7">
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" th:field="*{orderDate}" required>
+                        <span th:if="${#fields.hasErrors('orderDate')}" th:errors="*{orderDate}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Поле Recipient -->
+            <div class="row justify-content-center">
+                <div class="form-group col-md-12">
+                    <div class="col-md-7">
+                        <label for="recipient">Recipient:</label>
+                        <input type="text" id="recipient" th:field="*{recipient}" required>
+                        <span th:if="${#fields.hasErrors('recipient')}" th:errors="*{recipient}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Поле Delivery Address -->
+            <div class="row justify-content-center">
+                <div class="form-group col-md-12">
+                    <div class="col-md-7">
+                        <label for="deliveryAddress">Delivery Address:</label>
+                        <input type="text" id="deliveryAddress" th:field="*{deliveryAddress}" required>
+                        <span th:if="${#fields.hasErrors('deliveryAddress')}" th:errors="*{deliveryAddress}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Поле Payment Type -->
+            <div class="row justify-content-center">
+                <div class="form-group col-md-12">
+                    <div class="col-md-7">
+                        <label for="paymentType">Payment Type:</label>
+                        <select id="paymentType" th:field="*{paymentType}" required>
+                            <option value="cash">cash</option>
+                            <option value="card">card</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Поле Delivery Type -->
+            <div class="row justify-content-center">
+                <div class="form-group col-md-12">
+                    <div class="col-md-7">
+                        <label for="deliveryType">Delivery Type:</label>
+                        <select id="deliveryType" th:field="*{deliveryType}" required>
+                            <option value="pickup">pickup</option>
+                            <option value="door-to-door delivery">door-to-door delivery</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кнопка Submit -->
+            <div class="button-container">
+                <button type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

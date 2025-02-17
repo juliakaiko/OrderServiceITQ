@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order creation</title>
+    <link rel="stylesheet" href="/css/my_style.css">
+</head>
+<body>
+<div class="order-form">
+    <div class="container mt-5">
+        <h2>Find Order By OrderDate And TotalSum Greater Than...</h2>
+        <!-- Форма с использованием th:object и th:field -->
+        <form action="/orders/filter_by_date_and_sum" th:object="${orderDto}" method="post">
+
+            <!-- Поле Date -->
+            <div class="row justify-content-center">
+                <div class="form-group col-md-12">
+                    <div class="col-md-7">
+                        <label for="orderDate">Date:</label>
+                        <input type="date" id="orderDate" th:field="*{orderDate}" required>
+                        <span th:if="${#fields.hasErrors('orderDate')}" th:errors="*{orderDate}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Поле Total Sum -->
+            <div class="row justify-content-center">
+                <div class="form-group col-md-12">
+                    <div class="col-md-7">
+                        <label for="totalSum">Total Sum:</label>
+                        <input type="text" id="totalSum" th:field="*{totalSum}" required>
+                        <span th:if="${#fields.hasErrors('totalSum')}" th:errors="*{totalSum}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кнопка Submit -->
+            <div class="button-container">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
