@@ -76,7 +76,7 @@ class OrderControllerTest {
         mockMvc.perform(get("/orders/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("order"))
-                .andExpect(model().attributeExists("order"));
+                .andExpect(model().attributeExists("orderDto"));
 
         verify(orderService, times(1)).getOrderById(1L);
     }
