@@ -2,6 +2,7 @@ package com.itq.myproject.service.impl;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.InjectMocks;
 
@@ -11,9 +12,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class NumberGenerateServiceImplTest {
+
+    @Mock
+    private RedisServiceImpl redisService;
 
     @InjectMocks
     private NumberGenerateServiceImpl numberGenerateService;
@@ -33,6 +40,12 @@ public class NumberGenerateServiceImplTest {
         assertNotNull(orderNumber);
         assertTrue(orderNumber.endsWith(expectedDatePart));
         assertEquals(13, orderNumber.length());
+
+        // Проверяем, что номер был сохранен в Redis
+        verify(redisService, times(1)).saveOrderNumber(
+                eq("order:" + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))),
+                eq(orderNumber)
+        );
     }
 
     @Test

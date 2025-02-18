@@ -1,6 +1,7 @@
 package com.itq.myproject.service.impl;
 
 import com.itq.myproject.service.NumberGenerateService;
+import com.itq.myproject.service.RedisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class NumberGenerateServiceImpl implements NumberGenerateService {
 
+    private final RedisServiceImpl redisService;
     private final Set<String> usedNumbers = new HashSet<>();
     private static final int RANDOM_LENGTH = 5;
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -31,6 +33,9 @@ public class NumberGenerateServiceImpl implements NumberGenerateService {
         } while (usedNumbers.contains(orderNumber)); // Проверка на уникальность
 
         usedNumbers.add(orderNumber);
+        // Сохранение номера в БД Redis => проверка  docker exec -it redis redis-cli
+        //127.0.0.1:6379> order:2025-02-18
+        redisService.saveOrderNumber("order:" + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")).toString(), orderNumber);
 
         return orderNumber;
     }
